@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LKPD Game IPAS – Daerahku di Masa Penjajahan</title>
+<style>
+:root{--s1:#8fd3ff;--s2:#fff1c9;--card:#fff;--ink:#23304d;--mute:#5d6b8a;--a:#ff7a3d;--b:#2e86de;--g:#27ae60;--r:#e8453c;--sea:#2e86de;--bl:#fff3b0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#12294a;--s2:#2b2450;--card:#1f2a44;--ink:#eef2ff;--mute:#aab6d6;--sea:#1c5aa6;--bl:#4a4320}}
+:root[data-theme="dark"]{--s1:#12294a;--s2:#2b2450;--card:#1f2a44;--ink:#eef2ff;--mute:#aab6d6;--sea:#1c5aa6;--bl:#4a4320}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;font:18px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:linear-gradient(var(--s1),var(--s2));background-attachment:fixed;overflow-x:hidden}
+#app{position:relative;z-index:2;max-width:520px;margin:0 auto;padding:14px 14px 110px}
+.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 6px 0 rgba(0,0,0,.12)}
+h1{font-size:25px;line-height:1.2;margin:6px 0;text-align:center;color:var(--a)}
+h2{font-size:22px;margin:0 0 8px;text-align:center}
+.sub{text-align:center;color:var(--mute);margin:0 0 8px;font-size:16px}
+.mascot{font-size:68px;text-align:center;animation:bob 1.6s ease-in-out infinite;line-height:1.1}
+.mascot.yay{animation:jump .6s ease 2}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-4deg)}}
+@keyframes jump{40%{transform:translateY(-26px) scale(1.15)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.shake{animation:shake .35s}
+.petunjuk{background:#d6ecff;border:3px solid var(--b);border-radius:16px;padding:12px 14px;color:#0b3d75;font-size:17px}
+input{width:100%;font:inherit;font-size:20px;padding:14px;border-radius:14px;border:3px solid var(--b);background:#fff;color:#23304d;margin:8px 0}
+input:focus{outline:none;border-color:var(--a)}
+button{font:inherit;font-weight:700;font-size:19px;border:0;border-radius:16px;padding:14px 16px;color:#fff;background:var(--g);box-shadow:0 5px 0 rgba(0,0,0,.2);width:100%;min-height:54px;cursor:pointer}
+button:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+button.o{background:var(--a)}button.b{background:var(--b)}button[disabled]{opacity:.5}
+.row{display:flex;gap:10px}.row button{flex:1}
+.top{display:flex;justify-content:space-between;gap:6px;font-weight:700;font-size:16px;margin-bottom:8px}
+.pill{background:var(--card);border-radius:999px;padding:5px 12px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.bar{height:16px;background:rgba(255,255,255,.7);border-radius:99px;overflow:hidden;margin-bottom:12px;border:2px solid #fff}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb347,#ff7a3d);border-radius:99px;transition:width .4s}
+.lvl{display:inline-block;background:var(--b);color:#fff;border-radius:12px;padding:3px 12px;font-size:15px;font-weight:700}
+#q{font-size:21px;line-height:1.55;margin:12px 0 4px}
+.blank{display:inline-block;min-width:92px;text-align:center;background:var(--bl);border-bottom:4px dashed var(--a);border-radius:8px;padding:0 8px;font-weight:700}
+.blank.ok{background:#c9f5d6;border-bottom-color:var(--g);color:#14673a}
+.blank.no{background:#ffd9d6;border-bottom-color:var(--r);color:#9b1f18}
+#fb{min-height:54px;margin:6px 0;font-weight:700;text-align:center;font-size:18px}
+.mini{font-size:46px;text-align:center;line-height:1}
+.stars{font-size:44px;text-align:center}
+ul.m{padding-left:20px;font-size:16px}
+.sea{position:fixed;left:0;right:0;bottom:0;height:78px;z-index:1;pointer-events:none;background:repeating-radial-gradient(circle at 20px 0,var(--sea) 0 14px,#4aa3f0 14px 18px);border-top:4px solid #7cc4ff}
+.ship{position:fixed;bottom:44px;left:-70px;font-size:48px;z-index:1;pointer-events:none;animation:sail 20s linear infinite}
+@keyframes sail{to{left:110%}}
+.cl{position:fixed;z-index:0;font-size:50px;pointer-events:none;opacity:.85;animation:drift 38s linear infinite}
+@keyframes drift{from{transform:translateX(-90px)}to{transform:translateX(115vw)}}
+.cf{position:fixed;top:-40px;font-size:30px;z-index:5;pointer-events:none;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="cl" style="top:6%;animation-delay:-5s">☁️</div>
+<div class="cl" style="top:20%;font-size:36px;animation-duration:50s;animation-delay:-30s">☁️</div>
+<div class="ship">⛵</div><div class="sea"></div>
+<div id="app">
+
+<section id="s-login">
+ <div class="mascot">🦜</div>
+ <h1>Petualangan Sejarah</h1>
+ <p class="sub">LKPD Game IPAS · Daerahku di Masa Penjajahan</p>
+ <div class="card">
+  <div class="petunjuk"><b>📖 Petunjuk:</b> Bacalah LKS IPAS halaman 63-69 dengan teliti, lalu lengkapilah kalimat rumpang dengan jawaban yang tepat!</div>
+  <p style="margin:12px 0 0;font-size:16px;color:var(--mute)">25 soal · 5 level · kumpulkan skor dan bintang sebanyak-banyaknya ⭐</p>
+  <label for="nm" style="display:block;margin-top:12px;font-weight:700">Siapa namamu?</label>
+  <input id="nm" type="text" maxlength="30" placeholder="Tulis namamu di sini" autocomplete="off">
+  <div id="err" style="color:var(--r);font-weight:700;min-height:24px;font-size:16px"></div>
+  <button id="go" class="o">Mulai Main 🚀</button>
+ </div>
+</section>
+
+<section id="s-game" hidden>
+ <div class="top"><span class="pill" id="hn"></span><span class="pill" id="hs">⭐ 0</span><span class="pill" id="hk">🔥 0</span></div>
+ <div class="bar"><i id="pb"></i></div>
+ <div class="card">
+  <span class="lvl" id="lv"></span> <span class="sub" id="no" style="font-size:15px"></span>
+  <div id="q"></div>
+  <input id="in" type="text" placeholder="Ketik jawabanmu" autocomplete="off" autocapitalize="none" spellcheck="false">
+  <div class="row"><button class="b" id="hint">💡 Petunjuk</button><button id="chk">Cek ✔</button></div>
+  <div id="fb"></div>
+  <div class="mini" id="mm">🦜</div>
+  <button class="o" id="nx" hidden style="margin-top:10px">Lanjut ▶</button>
+ </div>
+</section>
+
+<section id="s-level" hidden>
+ <div class="card"><div class="mascot yay">🏝️</div><h2 id="lt"></h2><div class="stars" id="ls"></div>
+ <p class="sub" id="lp"></p><button class="o" id="ln">Level Berikutnya ▶</button></div>
+</section>
+
+<section id="s-end" hidden>
+ <div class="card"><div class="mascot yay">🏆</div><h2 id="et"></h2><div class="stars" id="es"></div>
+ <p class="sub" id="ep" style="font-size:19px"></p>
+ <div id="em"></div><button class="o" id="again" style="margin-top:10px">Main Lagi 🔄</button></div>
+</section>
+</div>
+
+<script>
+const D=[
+["Bangsa Eropa pertama yang berhasil menemukan Kepulauan Nusantara sebagai daerah penghasil rempah-rempah adalah bangsa ___.","Portugis"],
+["Misi bangsa Portugis disingkat 3G, yaitu gold, glory, dan ___.","gospel"],
+["Indonesia berada di wilayah ___ sehingga menjadi tempat tumbuh yang baik bagi tanaman rempah-rempah.","tropis"],
+["Revolusi Industri berawal dari negara ___ pada tahun 1760-an.","Inggris"],
+["Mesin uap buatan Thomas Newcomen dimodifikasi oleh James ___.","Watt"],
+["Selain mesin uap, Revolusi Industri didukung penemuan ___ yang menunjukkan arah saat berlayar.","kompas"],
+["Pelopor penjelajahan samudra untuk menemukan Indonesia adalah Portugis dan ___.","Spanyol"],
+["Pelaut Portugis pertama yang berlayar ke Dunia Timur adalah Bartholomeus ___.","Diaz"],
+["Pada tahun 1497, ___ da Gama memulai penjelajahan mengikuti rute Bartholomeus Diaz.","Vasco"],
+["Ekspedisi Portugis berikutnya dipimpin oleh Alfonso de ___ dan berhasil mendarat di Malaka.","Albuquerque"],
+["Anthony d’Abreu dan Fransisco Serau berhasil menjalin persahabatan dengan Kesultanan ___.","Ternate"],
+["Magellan terbunuh oleh penduduk lokal di Kepulauan Massava, ___, pada tahun 1521.","Filipina"],
+["Orang Belanda pertama yang berusaha menemukan Indonesia adalah Willem ___.","Barents"],
+["Orang Belanda pertama yang datang ke Indonesia adalah Cornelis de ___.","Houtman"],
+["Thomas ___ adalah orang Inggris pertama yang berlayar hanya untuk mengelilingi dunia.","Cavendish","cendish"],
+["VOC dibentuk di ___, Belanda, pada Maret 1602.","Amsterdam"],
+["Parlemen Belanda memberi VOC hak ___ atau hak istimewa, misalnya hak monopoli berdagang.","oktroi"],
+["Kerja paksa tanpa upah untuk membangun jalan pada masa Daendels dikenal dengan nama kerja ___.","rodi"],
+["Sistem tanam paksa dalam bahasa Belanda disebut ___.","cultuurstelsel","culturstelsel;cultuur stelsel"],
+["Tiga kebijakan Trias van Deventer adalah irigasi, edukasi, dan ___.","emigrasi"],
+["Tujuan utama Jepang menduduki Indonesia adalah menguasai sumber alam, terutama ___ bumi.","minyak"],
+["Penduduk Indonesia dimanfaatkan Jepang sebagai pekerja kasar yang disebut ___.","romusha"],
+["Sebagai janji kemerdekaan, Jepang membentuk Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan Indonesia yang disingkat ___.","BPUPKI"],
+["Pada 7 Agustus 1945 dibentuk Panitia Persiapan Kemerdekaan Indonesia yang disingkat ___.","PPKI"],
+["Proklamasi Kemerdekaan Indonesia pada 17 Agustus 1945 dikumandangkan oleh ___.","Soekarno","sukarno;bung karno;ir soekarno"]
+];
+const LV=["Level 1 · Misi 3G & Rempah","Level 2 · Pelaut Portugis & Spanyol","Level 3 · Belanda & Inggris Datang","Level 4 · VOC, Rodi & Politik Etis","Level 5 · Jepang sampai Proklamasi"];
+const OKM=["Hebat! 🎉","Benar sekali! 🌟","Keren, lanjutkan! 💪","Mantap! 👏","Pintar! 🥳"];
+let name="",i=0,score=0,streak=0,tries=0,hinted=false,done=false,miss=[],lvOK=0;
+const $=id=>document.getElementById(id);
+const n=s=>s.toLowerCase().replace(/[^a-z0-9\/ ]/g,"").replace(/\s+/g," ").trim();
+function show(id){["s-login","s-game","s-level","s-end"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
+function confetti(){for(let k=0;k<22;k++){const e=document.createElement("div");e.className="cf";e.textContent=["🎉","⭐","🎊","✨"][k%4];e.style.left=Math.random()*95+"%";e.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),4200)}}
+function mood(m,y){$("mm").textContent=m;}
+function render(){
+ const q=D[i];tries=0;hinted=false;done=false;
+ $("lv").textContent=LV[Math.floor(i/5)];$("no").textContent="Soal "+(i+1)+" dari 25";
+ $("q").innerHTML=q[0].replace("___",'<span class="blank" id="bl">?????</span>');
+ $("in").value="";$("in").disabled=false;$("fb").textContent="";$("nx").hidden=true;$("chk").disabled=false;$("hint").disabled=false;
+ $("pb").style.width=(i/25*100)+"%";$("hn").textContent="👤 "+name;mood("🦜");
+ $("hs").textContent="⭐ "+score;$("hk").textContent="🔥 "+streak;
+}
+function fin(ok){
+ done=true;const q=D[i],b=$("bl");b.textContent=q[1];b.className="blank "+(ok?"ok":"no");
+ $("in").disabled=true;$("chk").disabled=true;$("hint").disabled=true;$("nx").hidden=false;
+ $("hs").textContent="⭐ "+score;$("hk").textContent="🔥 "+streak;
+ $("nx").textContent=(i+1)%5==0?(i==24?"Lihat Hasil 🏆":"Selesai Level ▶"):"Lanjut ▶";
+ $("nx").focus();
+}
+function check(){
+ if(done)return;const v=n($("in").value);if(!v)return;
+ const q=D[i],okl=[q[1]].concat((q[2]||"").split(";").filter(Boolean)).map(n);
+ if(okl.includes(v)){
+  let p=tries==0?20:10;if(hinted)p-=5;streak++;let bon=streak>=3?5:0;score+=p+bon;lvOK++;
+  $("fb").style.color="var(--g)";$("fb").textContent=OKM[i%5]+" +"+(p+bon)+(bon?" (bonus beruntun!)":"");
+  $("mm").textContent="🥳";$("mm").className="mini mascot yay";fin(true);
+ }else{
+  tries++;streak=0;$("hk").textContent="🔥 0";
+  if(tries>=2){miss.push(i);$("fb").style.color="var(--r)";$("fb").textContent="Jawaban yang benar: "+q[1]+". Ayo baca lagi bukunya ya! 📖";$("mm").textContent="🤔";fin(false)}
+  else{$("fb").style.color="var(--r)";$("fb").textContent="Belum tepat, coba sekali lagi! 💪";$("mm").textContent="😮";const c=$("in");c.classList.remove("shake");void c.offsetWidth;c.classList.add("shake");c.select()}
+ }
+}
+function hint(){if(done||hinted)return;hinted=true;const a=D[i][1];$("fb").style.color="var(--b)";$("fb").textContent="💡 Diawali huruf “"+a[0]+"”, jumlah huruf: "+a.length+" (−5 poin)";$("in").focus()}
+function next(){
+ i++;$("mm").className="mini";
+ if(i%5==0&&i<25){const l=i/5;$("lt").textContent="Level "+l+" selesai!";$("ls").textContent=lvOK>=5?"⭐⭐⭐":lvOK>=3?"⭐⭐":"⭐";$("lp").textContent="Kamu benar "+lvOK+" dari 5 soal. Skor: "+score;lvOK=0;confetti();show("s-level")}
+ else if(i>=25){end()}else render();
+}
+function end(){
+ const c=25-miss.length;$("et").textContent="Selamat, "+name+"!";$("es").textContent=c>=23?"⭐⭐⭐⭐⭐":c>=18?"⭐⭐⭐⭐":c>=13?"⭐⭐⭐":c>=8?"⭐⭐":"⭐";
+ $("ep").innerHTML="Skor akhir: <b>"+score+"</b><br>Jawaban benar: <b>"+c+" dari 25</b>";
+ $("em").innerHTML=miss.length?"<b>📖 Yuk pelajari lagi:</b><ul class=\"m\">"+miss.map(k=>"<li>"+D[k][0].replace("___","<b>"+D[k][1]+"</b>")+"</li>").join("")+"</ul>":"<p class=\"sub\">Semua jawabanmu benar. Luar biasa! 🎉</p>";
+ confetti();show("s-end");
+}
+function start(){
+ name=$("nm").value.trim();
+ if(!name){$("err").textContent="Tulis namamu dulu ya!";$("nm").focus();return}
+ i=0;score=0;streak=0;miss=[];lvOK=0;show("s-game");render();
+}
+$("go").onclick=start;$("nm").onkeydown=e=>{if(e.key=="Enter")start()};
+$("chk").onclick=check;$("in").onkeydown=e=>{if(e.key=="Enter")check()};
+$("hint").onclick=hint;$("nx").onclick=next;
+$("ln").onclick=()=>{show("s-game");render()};
+$("again").onclick=()=>{$("nm").value=name;show("s-login")};
+</script>
+</body>
+</html>
